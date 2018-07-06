@@ -25,8 +25,8 @@ import javax.swing.JTextArea;
  *
  * @author lucastoshitaka
  */
-@WebServlet(name = "ServletListaAluno", urlPatterns = {"/tabelaAluno"})
-public class ServletListaAluno extends HttpServlet {
+@WebServlet(name = "ServletListaAlunos", urlPatterns = {"/tabelaAlunos"})
+public class AlunosServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,39 +43,41 @@ public class ServletListaAluno extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        String listaAluno = "";
+        String listaAlunos = "";
 
         try (PrintWriter out = response.getWriter()) {
-            listaAluno = request.getParameter("Aluno");
+            listaAlunos = request.getParameter("Alunos");
 
             String resultado = "";
-            if (listaAluno == null || listaAluno.equals("")) {
-                resultado = listaAlunosCadastrados();
+            if (listaAlunos == null || listaAlunos.equals("")) {
+                resultado = listaAlunossCadastrados();
             } else {
-                resultado = listaAlunoNome(listaAluno);
+                resultado = listaAlunosNome(listaAlunos);
             }
-            request.getSession().setAttribute("resultado", resultado);
-            response.sendRedirect(request.getContextPath() + "/paginas/tabelaAluno.jsp");
+            request.getSession().setAttribute("resultado4", resultado);
+            response.sendRedirect(request.getContextPath() + "/paginas/tabelaAlunos.jsp");
         }
     }
 
-    protected String listaAlunoNome(String listaAluno) {
+    protected String listaAlunosNome(String listaAlunos) {
         DAOAluno aluno = new DAOAluno();
         String tabela = "";
-        List<Aluno> lista = aluno.listByNome(listaAluno);
+        List<Aluno> lista = aluno.listByNome(listaAlunos);
         for (Aluno l : lista) {
             tabela += "<tr>"
                     + "<td>" + l.getCpf()+ "</td>"
                     + "<td>" + l.getNome()+ "</td>"
                     + "<td>" + l.getSenha()+ "</td>"
                     + "<td>" + l.getFoto()+ "</td>"
-                    + "<td>" + dateDataInscricao.format(l.getDataInscricao()) + "</td>"
+                    + "<td>" + l.getDataInscricao()+ "</td>"
+                    + "<td>" + l.getEstado()+ "</td>"
+                    
                     + "</tr>";
         }
         return tabela;
     }
 
-    protected String listaAlunosCadastrados() {
+    protected String listaAlunossCadastrados() {
         DAOAluno aluno = new DAOAluno();
         String tabela = "";
         List<Aluno> lista = aluno.listInOrderNome();
@@ -85,7 +87,8 @@ public class ServletListaAluno extends HttpServlet {
                     + "<td>" + l.getNome()+ "</td>"
                     + "<td>" + l.getSenha()+ "</td>"
                     + "<td>" + l.getFoto()+ "</td>"
-                    + "<td>" + dateDataInscricao.format(l.getDataInscricao()) + "</td>"
+                    + "<td>" + l.getDataInscricao()+ "</td>"
+                    + "<td>" + l.getEstado()+ "</td>"
                     + "</tr>";
         }
         return tabela;
@@ -112,13 +115,19 @@ public class ServletListaAluno extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
-            Logger.getLogger(ServletListaAluno.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AlunosServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
       
            
         
     }
 
+     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
      // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
      // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -145,7 +154,7 @@ public class ServletListaAluno extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
-            Logger.getLogger(ServletListaAluno.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AlunosServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("teste dopost");
     }

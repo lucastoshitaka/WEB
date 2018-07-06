@@ -5,8 +5,8 @@
  */
 package Controles;
 
-import DAOs.DAOAluno;
-import Entidades.Aluno;
+import DAOs.DAOModalidades;
+import Entidades.Modalidades;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -25,7 +25,7 @@ import javax.swing.JTextArea;
  *
  * @author lucastoshitaka
  */
-@WebServlet(name = "ServletListaAluno", urlPatterns = {"/tabelaAluno"})
+@WebServlet(name = "ServletListaModalidades", urlPatterns = {"/tabelaModalidades"})
 public class ModalidadesServlet extends HttpServlet {
 
     /**
@@ -43,49 +43,45 @@ public class ModalidadesServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        String listaAluno = "";
+        String listaModalidades = "";
 
         try (PrintWriter out = response.getWriter()) {
-            listaAluno = request.getParameter("Aluno");
+            listaModalidades = request.getParameter("Modalidades");
 
             String resultado = "";
-            if (listaAluno == null || listaAluno.equals("")) {
-                resultado = listaAlunosCadastrados();
+            if (listaModalidades == null || listaModalidades.equals("")) {
+                resultado = listaModalidadessCadastrados();
             } else {
-                resultado = listaAlunoNome(listaAluno);
+                resultado = listaModalidadesNome(listaModalidades);
             }
-            request.getSession().setAttribute("resultado", resultado);
-            response.sendRedirect(request.getContextPath() + "/paginas/tabelaAluno.jsp");
+            request.getSession().setAttribute("resultado3", resultado);
+            response.sendRedirect(request.getContextPath() + "/paginas/tabelaModalidades.jsp");
         }
     }
 
-    protected String listaAlunoNome(String listaAluno) {
-        DAOAluno aluno = new DAOAluno();
+    protected String listaModalidadesNome(String listaModalidades) {
+        DAOModalidades aluno = new DAOModalidades();
         String tabela = "";
-        List<Aluno> lista = aluno.listByNome(listaAluno);
-        for (Aluno l : lista) {
+        List<Modalidades> lista = aluno.listByNome(listaModalidades);
+        for (Modalidades l : lista) {
             tabela += "<tr>"
-                    + "<td>" + l.getCpf()+ "</td>"
-                    + "<td>" + l.getNome()+ "</td>"
-                    + "<td>" + l.getSenha()+ "</td>"
-                    + "<td>" + l.getFoto()+ "</td>"
-                    + "<td>" + dateDataInscricao.format(l.getDataInscricao()) + "</td>"
+                    + "<td>" + l.getIdModalidades()+ "</td>"
+                    + "<td>" + l.getNomeModalidades()+ "</td>"
+                    
                     + "</tr>";
         }
         return tabela;
     }
 
-    protected String listaAlunosCadastrados() {
-        DAOAluno aluno = new DAOAluno();
+    protected String listaModalidadessCadastrados() {
+        DAOModalidades aluno = new DAOModalidades();
         String tabela = "";
-        List<Aluno> lista = aluno.listInOrderNome();
-        for (Aluno l : lista) {
+        List<Modalidades> lista = aluno.listInOrderNome();
+        for (Modalidades l : lista) {
             tabela += "<tr>"
-                    + "<td>" + l.getCpf()+ "</td>"
-                    + "<td>" + l.getNome()+ "</td>"
-                    + "<td>" + l.getSenha()+ "</td>"
-                    + "<td>" + l.getFoto()+ "</td>"
-                    + "<td>" + dateDataInscricao.format(l.getDataInscricao()) + "</td>"
+                    + "<td>" + l.getIdModalidades()+ "</td>"
+                    + "<td>" + l.getNomeModalidades()+ "</td>"
+                    
                     + "</tr>";
         }
         return tabela;

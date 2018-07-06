@@ -18,7 +18,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JTextArea;
 
 /**
  *
@@ -29,7 +28,7 @@ public class EstadoServlet extends HttpServlet {
 
     Locale ptBr = new Locale("pt", "BR");
     NumberFormat formatoDinheiro = NumberFormat.getCurrencyInstance(ptBr);
-    DAOEstado controle = new DAOEstado();
+    DAOEstado controle2 = new DAOEstado();
     List<Estado> dados = new ArrayList<>();
 
     /**
@@ -108,13 +107,14 @@ public class EstadoServlet extends HttpServlet {
         String text = new String();
         String[] aux;
         text = "";
-        dados = controle.listInOrderNome();
+        dados = controle2.listInOrderNome();
         for (Estado linha : dados) {
             aux = String.valueOf(linha).split("-");
             text
                     += "<tr>"
                     + "<td>" + aux[0] + "</td>"
                     + "<td>" + aux[1] + "</td>"
+                   
                     + "<tr>";
         }
         return text;

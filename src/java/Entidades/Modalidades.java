@@ -28,6 +28,11 @@ import javax.persistence.Table;
     @NamedQuery(name = "Modalidades.findAll", query = "SELECT m FROM Modalidades m")})
 public class Modalidades implements Serializable {
 
+    @ManyToMany(mappedBy = "modalidadesList")
+    private List<Aluno> alunoList;
+    @ManyToMany(mappedBy = "modalidadesList")
+    private List<Disciplinas> disciplinasList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,10 +42,6 @@ public class Modalidades implements Serializable {
     @Basic(optional = false)
     @Column(name = "nome_modalidades")
     private String nomeModalidades;
-    @ManyToMany(mappedBy = "modalidadesList")
-    private List<Aluno> alunoList;
-    @ManyToMany(mappedBy = "modalidadesList")
-    private List<Disciplinas> disciplinasList;
 
     public Modalidades() {
     }
@@ -70,22 +71,6 @@ public class Modalidades implements Serializable {
         this.nomeModalidades = nomeModalidades;
     }
 
-    public List<Aluno> getAlunoList() {
-        return alunoList;
-    }
-
-    public void setAlunoList(List<Aluno> alunoList) {
-        this.alunoList = alunoList;
-    }
-
-    public List<Disciplinas> getDisciplinasList() {
-        return disciplinasList;
-    }
-
-    public void setDisciplinasList(List<Disciplinas> disciplinasList) {
-        this.disciplinasList = disciplinasList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -108,7 +93,22 @@ public class Modalidades implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Modalidades[ idModalidades=" + idModalidades + " ]";
+return idModalidades + ";" + nomeModalidades;    }
+
+    public List<Aluno> getAlunoList() {
+        return alunoList;
+    }
+
+    public void setAlunoList(List<Aluno> alunoList) {
+        this.alunoList = alunoList;
+    }
+
+    public List<Disciplinas> getDisciplinasList() {
+        return disciplinasList;
+    }
+
+    public void setDisciplinasList(List<Disciplinas> disciplinasList) {
+        this.disciplinasList = disciplinasList;
     }
     
 }

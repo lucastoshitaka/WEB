@@ -30,6 +30,14 @@ import javax.persistence.Table;
     @NamedQuery(name = "Disciplinas.findAll", query = "SELECT d FROM Disciplinas d")})
 public class Disciplinas implements Serializable {
 
+    @ManyToMany(mappedBy = "disciplinasList")
+    private List<Aluno> alunoList;
+    @JoinTable(name = "disciplinas_has_modalidades", joinColumns = {
+        @JoinColumn(name = "disciplinas_id_disciplinas", referencedColumnName = "id_disciplinas")}, inverseJoinColumns = {
+        @JoinColumn(name = "modalidades_id_modalidades", referencedColumnName = "id_modalidades")})
+    @ManyToMany
+    private List<Modalidades> modalidadesList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,13 +47,6 @@ public class Disciplinas implements Serializable {
     @Basic(optional = false)
     @Column(name = "nome_disciplinas")
     private String nomeDisciplinas;
-    @ManyToMany(mappedBy = "disciplinasList")
-    private List<Aluno> alunoList;
-    @JoinTable(name = "disciplinas_has_modalidades", joinColumns = {
-        @JoinColumn(name = "disciplinas_id_disciplinas", referencedColumnName = "id_disciplinas")}, inverseJoinColumns = {
-        @JoinColumn(name = "modalidades_id_modalidades", referencedColumnName = "id_modalidades")})
-    @ManyToMany
-    private List<Modalidades> modalidadesList;
 
     public Disciplinas() {
     }
@@ -75,22 +76,6 @@ public class Disciplinas implements Serializable {
         this.nomeDisciplinas = nomeDisciplinas;
     }
 
-    public List<Aluno> getAlunoList() {
-        return alunoList;
-    }
-
-    public void setAlunoList(List<Aluno> alunoList) {
-        this.alunoList = alunoList;
-    }
-
-    public List<Modalidades> getModalidadesList() {
-        return modalidadesList;
-    }
-
-    public void setModalidadesList(List<Modalidades> modalidadesList) {
-        this.modalidadesList = modalidadesList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -113,7 +98,22 @@ public class Disciplinas implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Disciplinas[ idDisciplinas=" + idDisciplinas + " ]";
+return idDisciplinas + ";" + nomeDisciplinas;    }
+
+    public List<Aluno> getAlunoList() {
+        return alunoList;
+    }
+
+    public void setAlunoList(List<Aluno> alunoList) {
+        this.alunoList = alunoList;
+    }
+
+    public List<Modalidades> getModalidadesList() {
+        return modalidadesList;
+    }
+
+    public void setModalidadesList(List<Modalidades> modalidadesList) {
+        this.modalidadesList = modalidadesList;
     }
     
 }
