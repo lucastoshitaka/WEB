@@ -6,14 +6,12 @@
 package Entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -27,11 +25,6 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Modalidades.findAll", query = "SELECT m FROM Modalidades m")})
 public class Modalidades implements Serializable {
-
-    @ManyToMany(mappedBy = "modalidadesList")
-    private List<Aluno> alunoList;
-    @ManyToMany(mappedBy = "modalidadesList")
-    private List<Disciplinas> disciplinasList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -93,22 +86,7 @@ public class Modalidades implements Serializable {
 
     @Override
     public String toString() {
-return idModalidades + ";" + nomeModalidades;    }
-
-    public List<Aluno> getAlunoList() {
-        return alunoList;
-    }
-
-    public void setAlunoList(List<Aluno> alunoList) {
-        this.alunoList = alunoList;
-    }
-
-    public List<Disciplinas> getDisciplinasList() {
-        return disciplinasList;
-    }
-
-    public void setDisciplinasList(List<Disciplinas> disciplinasList) {
-        this.disciplinasList = disciplinasList;
+        return "Entidades.Modalidades[ idModalidades=" + idModalidades + " ]";
     }
     
 }

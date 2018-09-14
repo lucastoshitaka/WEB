@@ -69,8 +69,7 @@ public class AlunosServlet extends HttpServlet {
                     + "<td>" + l.getNome()+ "</td>"
                     + "<td>" + l.getSenha()+ "</td>"
                     + "<td>" + l.getFoto()+ "</td>"
-                    + "<td>" + l.getDataInscricao()+ "</td>"
-                    + "<td>" + l.getEstado()+ "</td>"
+                    + "<td>" + l.getEstado().getNomeEstado()+ "</td>"
                     
                     + "</tr>";
         }
@@ -87,8 +86,7 @@ public class AlunosServlet extends HttpServlet {
                     + "<td>" + l.getNome()+ "</td>"
                     + "<td>" + l.getSenha()+ "</td>"
                     + "<td>" + l.getFoto()+ "</td>"
-                    + "<td>" + l.getDataInscricao()+ "</td>"
-                    + "<td>" + l.getEstado()+ "</td>"
+                    + "<td>" + l.getEstado().getNomeEstado()+ "</td>"
                     + "</tr>";
         }
         return tabela;

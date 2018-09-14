@@ -62,7 +62,6 @@
                                             <th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Nome do aluno" style="width: 170px;">Nome do aluno</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="senha do aluno" style="width: 170px;">Senha do aluno</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Foto do aluno" style="width: 170px;">Foto do aluno</th>
-                                      <th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Data de inscricao do aluno" style="width: 170px;">Data de inscrição do aluno</th>
                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Estado do aluno" style="width: 170px;">Estado do aluno</th>
                                         </tr>
                                     </thead>

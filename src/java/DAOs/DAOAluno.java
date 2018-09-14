@@ -1,5 +1,6 @@
 package DAOs;
 import Entidades.Aluno;
+import Entidades.Estado;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,13 +43,13 @@ public class DAOAluno extends DAOGenerico<Aluno> {
             lf = listInOrderNome();
         }
 
+                    
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
             ls.add(lf.get(i).getCpf()
  + "-" + lf.get(i).getNome()
  + "-" + lf.get(i).getSenha()
  + "-" + lf.get(i).getFoto()
- + "-" + lf.get(i).getDataInscricao()
 );
         }
         return ls;

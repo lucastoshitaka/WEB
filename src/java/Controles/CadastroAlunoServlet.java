@@ -11,6 +11,7 @@ import Entidades.Aluno;
 import Entidades.Estado;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +22,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lucastoshitaka
  */
-@WebServlet(name = "CadastroEstadoServlet", urlPatterns = {"/CadastroEstadoServlet"})
-public class CadastroEstadoServlet extends HttpServlet {
+@WebServlet(name = "CadastroAlunoServlet", urlPatterns = {"/CadastroAlunoServlet"})
+public class CadastroAlunoServlet extends HttpServlet {
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,35 +39,55 @@ public class CadastroEstadoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CadastroEstadoServlet</title>");
+            out.println("<title>Servlet CadastroAlunoServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CadastroEstadoServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CadastroAlunoServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
 
-            String siglaEstado = request.getParameter("siglaEstado");
-            String nomeEstado = request.getParameter("nomeEstado");
-
-            DAOEstado controle = new DAOEstado();
-            Estado entidade = new Estado();
-
+                 DAOEstado daoEstado = new DAOEstado();
+            Estado estado = new Estado();
+            
+            DAOAluno controle = new DAOAluno();
+            Aluno entidade = new Aluno();      
 
             
-            entidade.setSiglaEstado(siglaEstado);
+            String cpfAluno = request.getParameter("cpfAluno");
+            String nomeAluno = request.getParameter("nomeAluno");
+            String senhaAluno = request.getParameter("senhaAluno");
+            String fotoAluno = request.getParameter("fotoAluno");
 
-            entidade.setNomeEstado(nomeEstado);
+            String est = String.valueOf(request.getParameter("estado"));
+            estado=daoEstado.obter(est);
             
             
+            System.out.println("0");
+            
+            System.out.println("3");
+         
+
+            entidade.setCpf(cpfAluno);
+            entidade.setNome(nomeAluno);
+            entidade.setSenha(senhaAluno);
+            entidade.setFoto(fotoAluno);
+                            entidade.setEstado(estado);
+
+            System.out.println("1");
+            
+                   
             
             controle.inserir(entidade);
-                        response.sendRedirect(request.getContextPath() + "/paginas/cadastroEstado.jsp");
+            System.out.println("4");
+            
 
-
+            response.sendRedirect(request.getContextPath() + "/paginas/cadastroAluno.jsp");
+      
         }
     }
 
@@ -80,7 +103,9 @@ public class CadastroEstadoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         processRequest(request, response);
+       
     }
 
     /**
@@ -94,14 +119,12 @@ public class CadastroEstadoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       
+            processRequest(request, response);
+        
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    
     @Override
     public String getServletInfo() {
         return "Short description";

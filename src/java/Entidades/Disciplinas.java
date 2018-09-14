@@ -6,16 +6,12 @@
 package Entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -29,14 +25,6 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Disciplinas.findAll", query = "SELECT d FROM Disciplinas d")})
 public class Disciplinas implements Serializable {
-
-    @ManyToMany(mappedBy = "disciplinasList")
-    private List<Aluno> alunoList;
-    @JoinTable(name = "disciplinas_has_modalidades", joinColumns = {
-        @JoinColumn(name = "disciplinas_id_disciplinas", referencedColumnName = "id_disciplinas")}, inverseJoinColumns = {
-        @JoinColumn(name = "modalidades_id_modalidades", referencedColumnName = "id_modalidades")})
-    @ManyToMany
-    private List<Modalidades> modalidadesList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -98,22 +86,7 @@ public class Disciplinas implements Serializable {
 
     @Override
     public String toString() {
-return idDisciplinas + ";" + nomeDisciplinas;    }
-
-    public List<Aluno> getAlunoList() {
-        return alunoList;
-    }
-
-    public void setAlunoList(List<Aluno> alunoList) {
-        this.alunoList = alunoList;
-    }
-
-    public List<Modalidades> getModalidadesList() {
-        return modalidadesList;
-    }
-
-    public void setModalidadesList(List<Modalidades> modalidadesList) {
-        this.modalidadesList = modalidadesList;
+        return "Entidades.Disciplinas[ idDisciplinas=" + idDisciplinas + " ]";
     }
     
 }

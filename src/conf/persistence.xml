@@ -6,6 +6,8 @@
     <class>Entidades.Disciplinas</class>
     <class>Entidades.Estado</class>
     <class>Entidades.Modalidades</class>
+    <class>Entidades.AlunoHasModalidades</class>
+    <class>Entidades.DisciplinasHasModalidades</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/dilogos"/>
